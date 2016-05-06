@@ -6,8 +6,8 @@
 easyblock='Tarball'
 
 name = 'CCP4'
-version = '6.5'
-versionsuffix = '-ARP-wARP-7.5'
+version = '7.0'
+versionsuffix = '-ARP-wARP-7.6'
 
 homepage = 'http://www.ccp4.ac.uk/'
 description = """  CCP4 exists to produce and support a world-leading, integrated suite 
@@ -27,11 +27,13 @@ toolchain = {'name': 'dummy', 'version': ''}
 sources = ['%(namelower)s-%(version)s-arp-linux-x86_64.tar.bz2']
 
 ccp4dir = '%(namelower)s-%(version)s'
-arpwarpdir = 'arp_warp_7.5'
+arpwarpdir = 'arp_warp_7.6'
 
-postinstallcmds = ['touch $HOME/.agree2ccp4v6',
-                   'cd %(installdir)s/' + ccp4dir + ' && ./BINARY.setup',
-                   'cd %(installdir)s/' + arpwarpdir + ' && ./install.sh ccp4=%(installdir)s/' + ccp4dir]
+postinstallcmds = [
+    'touch $HOME/.agree2ccp4v6',
+    'cd %(installdir)s/' + ccp4dir + ' && ./BINARY.setup',
+    'cd %(installdir)s/' + arpwarpdir + ' && ./install.sh ccp4=%(installdir)s/' + ccp4dir,
+]
 
 sanity_check_paths = {
     'files': [ccp4dir + '/bin/ccp4.setup-sh'], # this file is created after ./BINARY.setup postinstall cmd
@@ -71,9 +73,7 @@ modextravars = {
     'warpdoc': '$root/%s/manual' % arpwarpdir
 }
 
-modtclfooter = """
-set ccp4_scr "/tmp/$env(USER)"
-setenv CCP4_SCR ${ccp4_scr}
+modtclfooter = """set ccp4_scr "/tmp/$env(USER)" setenv CCP4_SCR ${ccp4_scr}
 if { ! [ file exists $ccp4_scr ] } {
     file mkdir $ccp4_scr
 }
