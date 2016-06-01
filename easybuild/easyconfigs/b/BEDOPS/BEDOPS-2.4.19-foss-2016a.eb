@@ -18,20 +18,29 @@ description = """ BEDOPS is an open-source command-line toolkit that performs hi
  archiving, conversion and other management of genomic data of arbitrary scale."""
 
 toolchain = {'name': 'foss', 'version': '2016a'}
+toolchainopts = {'static': True}
 
 source_urls = ['https://github.com/bedops/bedops/archive/']
 sources = ['v%(version)s.tar.gz']
 
 #patches = ['BEDOPS-jansson-gcc.patch']
 
-buildopts = ' && make install'
+buildopts = ' & make install'
+
+#osdependencies = ['glibc-static']
 
 files_to_copy = ["bin"]
 
 sanity_check_paths = {
-    'files': ["bin/%s" % x for x in ["bedmap", "bam2bed", "sort-bed",
-                                     "starchcat", "vcf2bed", "wig2bed",
-                                     "gtf2bed", "bedops", "wig2bed"]],
+    'files': ["bin/%s" % x for x in ["bam2bed", "bam2bed_gnuParallel", "bam2bed_sge",
+                                     "bam2starch", "bam2starch_gnuParallel", "bam2starch_sge",
+                                     "bedextract", "bedmap", "bedops", "closest-features", 
+                                     "convert2bed", "gff2bed", "gff2starch", "gtf2bed", "gtf2starch",
+                                     "gvf2bed", "gvf2starch", "psl2bed", "psl2starch",
+                                     "rmsk2bed", "rmsk2starch", "sam2bed", "sam2starch",
+                                     "sort-bed", "starch", "starchcat", "starchcluster_gnuParallel",
+                                     "starchcluster_sge", "unstarch", "vcf2bed", "vcf2starch", 
+                                     "wig2bed", "wig2starch"]],
     'dirs': []
 }
 
