@@ -23,13 +23,17 @@ toolchainopts = {'static': True}
 source_urls = ['https://github.com/bedops/bedops/archive/']
 sources = ['v%(version)s.tar.gz']
 
-#patches = ['BEDOPS-jansson-gcc.patch']
+prebuildopts = 'unset LIBS && '
 
 buildopts = ' & make install'
 
-#osdependencies = ['glibc-static']
-
-files_to_copy = ["bin"]
+files_to_copy = [
+    (["applications/bed/bedextract/bin/bedextract", "applications/bed/bedmap/bin/bedmap",
+    "applications/bed/bedops/bin/bedops", "applications/bed/closestfeats/bin/closest-features",
+    "applications/bed/conversion/bin/convert2bed", "applications/bed/sort-bed/bin/sort-bed",
+    "applications/bed/starch/bin/*"], "bin"), 
+    (["bin/*"], "bin"),
+]
 
 sanity_check_paths = {
     'files': ["bin/%s" % x for x in ["bam2bed", "bam2bed_gnuParallel", "bam2bed_sge",
